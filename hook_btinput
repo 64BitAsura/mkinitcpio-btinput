@@ -1,0 +1,38 @@
+#!/usr/bin/ash
+#
+# This file is part of mkinitcpio-bluetooth-input.  mkinitcpio-bluetooth-input 
+# is free software: you can redistribute it and/or modify it under the terms 
+# of the GNU General Public License as published by the Free Software Foundation, 
+# version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#   
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#   
+# Copyright Aline Freitas <aline@alinefreitas.com.br>
+# 
+
+run_earlyhook() {
+    msg ":: Activating dbus..."
+    mkdir -m755 /run/dbus
+    dbus-daemon --system
+}
+
+run_hook() {
+	msg ":: Activating bluetoothd..."
+	mkdir -m755 /run/sdp
+	/usr/lib/bluetooth/bluetoothd &
+	echo -e 'power on\nconnect 00:1F:20:A8:92:1B\nquit' | bluetoothctl
+}
+
+run_cleanuphook() {
+    msg ":: Deactivating bluetoothd..."
+	killall bluetoothd
+    msg ":: Deactivating dbus..."
+    killall dbus-daemon
+}
