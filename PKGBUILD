@@ -1,5 +1,5 @@
 # Author: Aline Freitas <aline@alinefreitas.com.br>
-pkgname=mkinitcpio-bluetooth-input
+pkgname=mkinitcpio-btinput
 pkgver=1.1
 pkgrel=1
 pkgdesc="This is a initcpio hook for bluetooth input devices. This is very useful if you have a bluetooth keyboard and use 'encrypt' hook"
@@ -11,13 +11,13 @@ makedepends=()
 conflicts=()
 replaces=()
 backup=()
-install=mkinitcpio-bluetooth-input.install
+install=mkinitcpio-btinput.install
 source=(install_btinput hook_btinput system.conf bluetooth.conf group 
 passwd)
 md5sums=('SKIP'
          'SKIP'
          'SKIP'
-	       'SKIP'
+	 'SKIP'
          'SKIP'
          'SKIP')
 
